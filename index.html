@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mira Anand — Designer & Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f5efe6;
+        --bg-2: #fbf7f0;
+        --surface: #fffdf9;
+        --line: rgba(31, 26, 22, 0.12);
+        --text: #241d17;
+        --muted: #6e645a;
+        --faint: #a89d90;
+        --accent: #cf6a4d;
+        --accent-soft: rgba(207, 106, 77, 0.12);
+        --r: 18px;
+        --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Hanken Grotesk", sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        position: relative;
+      }
+      /* ambient warmth + subtle paper grain */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            120% 80% at 82% -10%,
+            rgba(207, 106, 77, 0.14),
+            transparent 55%
+          ),
+          radial-gradient(
+            90% 60% at -10% 18%,
+            rgba(120, 150, 140, 0.1),
+            transparent 60%
+          );
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.04;
+        mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      /* NAV */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 0 8px;
+        position: relative;
+        z-index: 2;
+      }
+      .brand {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 1.15rem;
+        letter-spacing: -0.01em;
+      }
+      .brand span {
+        color: var(--accent);
+      }
+      .nav-cta {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        padding: 8px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        transition: 0.35s var(--ease);
+      }
+      .nav-cta:hover {
+        color: var(--text);
+        border-color: var(--accent);
+        background: var(--accent-soft);
+      }
+
+      /* HERO */
+      header {
+        padding: 64px 0 56px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 22px;
+      }
+      .eyebrow .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-soft);
+        animation: pulse 2.4s var(--ease) infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(0.7);
+          opacity: 0.6;
+        }
+      }
+      h1 {
+        font-family: "Fraunces", serif;
+        font-weight: 400;
+        font-size: clamp(2.7rem, 11vw, 4.6rem);
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+        margin-bottom: 24px;
+      }
+      h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+      .lede {
+        font-size: 1.08rem;
+        color: var(--muted);
+        max-width: 30ch;
+        margin-bottom: 34px;
+      }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-weight: 500;
+        text-decoration: none;
+        font-size: 0.95rem;
+        padding: 14px 22px;
+        border-radius: 999px;
+        transition: 0.4s var(--ease);
+      }
+      .btn-primary {
+        background: var(--text);
+        color: var(--bg);
+      }
+      .btn-primary:hover {
+        background: var(--accent);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+      .btn-ghost {
+        color: var(--text);
+        border: 1px solid var(--line);
+      }
+      .btn-ghost:hover {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        transform: translateY(-2px);
+      }
+      .btn .arrow {
+        transition: transform 0.4s var(--ease);
+      }
+      .btn:hover .arrow {
+        transform: translate(3px, -3px);
+      }
+
+      /* marquee */
+      .marquee {
+        margin: 48px 0 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        padding: 16px 0;
+        overflow: hidden;
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 12%,
+          #000 88%,
+          transparent
+        );
+      }
+      .marquee-track {
+        display: flex;
+        gap: 34px;
+        white-space: nowrap;
+        width: max-content;
+        animation: scroll 22s linear infinite;
+        font-family: "Fraunces", serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        color: var(--faint);
+      }
+      .marquee-track b {
+        color: var(--text);
+        font-style: normal;
+        font-weight: 400;
+      }
+      @keyframes scroll {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* SECTION HEADS */
+      section {
+        padding: 64px 0;
+      }
+      .head {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        margin-bottom: 38px;
+      }
+      .head .num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--faint);
+      }
+      .head h2 {
+        font-family: "Fraunces", serif;
+        font-weight: 500;
+        font-size: clamp(1.7rem, 6vw, 2.3rem);
+        letter-spacing: -0.01em;
+      }
+
+      /* WORK */
+      .work {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .card {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: var(--r);
+        padding: 22px;
+        overflow: hidden;
+        background: var(--surface);
+        transition: 0.45s var(--ease);
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        box-shadow: 0 1px 2px rgba(31, 26, 22, 0.03);
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(207, 106, 77, 0.45);
+        box-shadow: 0 18px 40px -22px rgba(31, 26, 22, 0.28);
+      }
+      .thumb {
+        height: 128px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .t1 {
+        background: linear-gradient(135deg, #e07a5f, #e0a85f);
+      }
+      .t2 {
+        background: linear-gradient(135deg, #5b8576, #a7cdbd);
+      }
+      .t3 {
+        background: linear-gradient(135deg, #8a7a6a, #cbb9a6);
+      }
+      .thumb::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.3) 1px,
+          transparent 1px
+        );
+        background-size: 14px 14px;
+        opacity: 0.45;
+        mix-blend-mode: overlay;
+      }
+      .thumb .tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.1em;
+        background: rgba(20, 17, 15, 0.45);
+        backdrop-filter: blur(6px);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 999px;
+      }
+      .card h3 {
+        font-family: "Fraunces", serif;
+        font-weight: 500;
+        font-size: 1.35rem;
+        letter-spacing: -0.01em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .card h3 .arrow {
+        color: var(--accent);
+        transition: transform 0.4s var(--ease);
+      }
+      .card:hover h3 .arrow {
+        transform: translate(4px, -4px);
+      }
+      .card p {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-top: 8px;
+      }
+
+      /* ABOUT */
+      .about p {
+        font-size: 1.18rem;
+        color: var(--text);
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      .about p.sub {
+        font-size: 1rem;
+        color: var(--muted);
+      }
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 30px;
+      }
+      .chip {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 9px 14px;
+        transition: 0.3s var(--ease);
+        background: var(--surface);
+      }
+      .chip:hover {
+        color: var(--text);
+        border-color: var(--accent);
+        background: var(--accent-soft);
+      }
+
+      /* CONTACT */
+      .contact {
+        text-align: center;
+        background: linear-gradient(180deg, var(--surface), var(--bg-2));
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 56px 28px;
+        margin-bottom: 8px;
+        box-shadow: 0 22px 50px -30px rgba(31, 26, 22, 0.25);
+      }
+      .contact h2 {
+        font-family: "Fraunces", serif;
+        font-weight: 400;
+        font-size: clamp(2rem, 9vw, 3rem);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin: 14px 0 26px;
+      }
+      .contact h2 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+      .mail {
+        font-family: "Fraunces", serif;
+        font-size: 1.2rem;
+        color: var(--text);
+        text-decoration: none;
+        border-bottom: 1px solid var(--accent);
+        padding-bottom: 3px;
+        transition: 0.3s var(--ease);
+      }
+      .mail:hover {
+        color: var(--accent);
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 30px 0 40px;
+        color: var(--faint);
+        font-size: 0.8rem;
+      }
+      .socials {
+        display: flex;
+        gap: 18px;
+      }
+      .socials a {
+        color: var(--muted);
+        text-decoration: none;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.78rem;
+        transition: 0.3s var(--ease);
+      }
+      .socials a:hover {
+        color: var(--accent);
+      }
+
+      /* reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.8s var(--ease),
+          transform 0.8s var(--ease);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      header .reveal {
+        transition-delay: calc(var(--i, 0) * 90ms);
+      }
+
+      @media (min-width: 700px) {
+        .wrap {
+          padding: 0 40px;
+        }
+        header {
+          padding: 90px 0 70px;
+        }
+        .work {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 18px;
+        }
+        .work .card:first-child {
+          grid-column: 1 / -1;
+        }
+        .work .card:first-child .thumb {
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav>
+        <div class="brand">Mira<span>.</span></div>
+        <a href="#contact" class="nav-cta">Let's talk</a>
+      </nav>
+
+      <header>
+        <span class="eyebrow reveal" style="--i: 0"
+          ><span class="dot"></span
+          ><span class="mono">Designer & Developer — '26</span></span
+        >
+        <h1 class="reveal" style="--i: 1">
+          I design &amp; build <em>calm</em>, considered products.
+        </h1>
+        <p class="lede reveal" style="--i: 2">
+          Independent product designer and front-end developer turning fuzzy
+          ideas into things people actually love to use.
+        </p>
+        <div class="cta-row reveal" style="--i: 3">
+          <a href="#work" class="btn btn-primary"
+            >See selected work <span class="arrow">↗</span></a
+          >
+          <a href="#about" class="btn btn-ghost">About me</a>
+        </div>
+
+        <div class="marquee reveal" style="--i: 4">
+          <div class="marquee-track">
+            <span
+              >Product&nbsp;Design <b>✦</b> Design&nbsp;Systems
+              <b>✦</b> Front-end <b>✦</b> Prototyping <b>✦</b> Brand
+              <b>✦</b></span
+            >
+            <span
+              >Product&nbsp;Design <b>✦</b> Design&nbsp;Systems
+              <b>✦</b> Front-end <b>✦</b> Prototyping <b>✦</b> Brand
+              <b>✦</b></span
+            >
+          </div>
+        </div>
+      </header>
+
+      <section id="work">
+        <div class="head reveal">
+          <span class="num">01</span>
+          <h2>Selected work</h2>
+        </div>
+        <div class="work">
+          <a href="#" class="card reveal">
+            <div class="thumb t1"><span class="tag">FINTECH · 2025</span></div>
+            <h3>Lumen Banking <span class="arrow">↗</span></h3>
+            <p>
+              Rebuilt onboarding for a neobank — cut drop-off by 38% with a
+              calmer, step-by-step flow.
+            </p>
+          </a>
+          <a href="#" class="card reveal">
+            <div class="thumb t2"><span class="tag">SAAS · 2025</span></div>
+            <h3>Fernweed <span class="arrow">↗</span></h3>
+            <p>A plant-care app with a soft, tactile design system.</p>
+          </a>
+          <a href="#" class="card reveal">
+            <div class="thumb t3"><span class="tag">BRAND · 2024</span></div>
+            <h3>Atlas Studio <span class="arrow">↗</span></h3>
+            <p>Identity &amp; site for a small architecture studio.</p>
+          </a>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="head reveal">
+          <span class="num">02</span>
+          <h2>About</h2>
+        </div>
+        <p class="reveal">
+          I&apos;ve spent the last six years helping startups and studios ship
+          interfaces that feel effortless — the kind you don&apos;t have to
+          think about.
+        </p>
+        <p class="sub reveal">
+          I care about the small things: a button that responds the way you
+          expect, copy that says exactly enough, motion that guides instead of
+          distracts. Lately I&apos;ve been blending design with code so ideas
+          reach real screens faster.
+        </p>
+        <div class="skills reveal">
+          <span class="chip">Figma</span>
+          <span class="chip">React</span>
+          <span class="chip">Design Systems</span>
+          <span class="chip">Framer</span>
+          <span class="chip">Accessibility</span>
+          <span class="chip">CSS</span>
+          <span class="chip">User Research</span>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="contact reveal">
+          <span class="mono">Available for select work</span>
+          <h2>Let&apos;s build something <em>worth keeping.</em></h2>
+          <a href="mailto:hello@mira.design" class="mail">hello@mira.design</a>
+        </div>
+        <footer>
+          <span>© 2026 Mira Anand</span>
+          <div class="socials">
+            <a href="#">Twitter</a>
+            <a href="#">Dribbble</a>
+            <a href="#">GitHub</a>
+          </div>
+        </footer>
+      </section>
+    </div>
+
+    <script>
+      window.addEventListener("load", () => {
+        document
+          .querySelectorAll("header .reveal")
+          .forEach((el) => el.classList.add("in"));
+      });
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.14 },
+      );
+      document
+        .querySelectorAll("section .reveal")
+        .forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
